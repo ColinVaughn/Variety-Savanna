@@ -52,7 +52,6 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
     private float warningAnimationProgress;
     private int warningSoundCooldown;
     private static final UniformIntProvider ANGER_TIME_RANGE;
-    private static final Ingredient LOVINGFOOD;
     private int angerTime;
     private UUID targetUuid;
 
@@ -87,7 +86,6 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
         this.goalSelector.add(1, new RhinoEntity.AttackGoal());
         this.goalSelector.add(1, new RhinoEscapeDangerGoal());
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-        this.goalSelector.add(3, new TemptGoal(this, 1.0D, LOVINGFOOD, false));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.add(5, new WanderAroundGoal(this, 1.0D));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -281,7 +279,6 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
     static {
         WARNING = DataTracker.registerData(RhinoEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
         ANGER_TIME_RANGE = TimeHelper.betweenSeconds(20, 39);
-        LOVINGFOOD = Ingredient.ofItems(Items.COD, Items.SALMON, Items.SWEET_BERRIES);
     }
 
     class RhinoEscapeDangerGoal extends EscapeDangerGoal {
