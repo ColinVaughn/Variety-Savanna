@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "expanse",
+  "version": "${version}",
+
+  "name": "Variety - Savanna",
+  "description": "Mod to Revamp the savanna biome",
+  "authors": [
+    "Texbobcat, Fflash"
+  ],
+  "contact": {
+    "homepage": "https://colinvaughn.me",
+    "sources": "https://github.com/ColinVaughn/Expanse"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.bettermc.expanse.VarietySavanna"
+    ],
+    "client": [
+      "net.bettermc.expanse.VarietySavannaClient"
+    ]
+  },
+  "mixins": [],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
