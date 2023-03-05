@@ -2,8 +2,7 @@ package net.bettermc.expanse.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.bettermc.expanse.VarietySavanna;
-import net.bettermc.expanse.entity.custom.PackedSnowballEntity;
+import net.bettermc.expanse.entity.custom.SpearEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
@@ -22,22 +21,20 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-public class PackedSnowballItem extends Item implements Vanishable {
+public class SpearWeaponItem extends Item implements Vanishable {
     public static final int field_30926 = 10;
     public static final float field_30927 = 8.0F;
     public static final float field_30928 = 2.5F;
     private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
-    public PackedSnowballItem(Item.Settings settings) {
+    public SpearWeaponItem(Item.Settings settings) {
         super(settings);
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Tool modifier", 8.0, EntityAttributeModifier.Operation.ADDITION));
@@ -68,7 +65,7 @@ public class PackedSnowballItem extends Item implements Vanishable {
                             p.sendToolBreakStatus(user.getActiveHand());
                         });
                         if (j == 0) {
-                            PackedSnowballEntity packedSnowballEntity = new PackedSnowballEntity(world, playerEntity, stack);
+                            SpearEntity packedSnowballEntity = new SpearEntity(world, playerEntity, stack);
                             packedSnowballEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
                             if (playerEntity.getAbilities().creativeMode) {
                                 packedSnowballEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
@@ -152,6 +149,6 @@ public class PackedSnowballItem extends Item implements Vanishable {
     }
 
     public int getEnchantability() {
-        return 1;
+        return 0;
     }
 }

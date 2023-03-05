@@ -12,6 +12,8 @@ public class ModRegistries {
 
     private static void registerAttributes() {
         FabricDefaultAttributeRegistry.register(ModEntities.RHINO, RhinoEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.OSTRICH, RhinoEntity.setAttributes());
+
     }
 
     }

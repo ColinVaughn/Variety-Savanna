@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "expanse:dirt_brick"
+    }
+  },
+  "result": {
+    "item": "expanse:dense_dirt_brick",
+    "count": 1
+  }
+}

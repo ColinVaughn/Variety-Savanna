@@ -50,7 +50,7 @@ public class ConfigUtil    {
                 aqprop.setProperty("entity.health","30.0");
                 aqprop.setProperty("entity.speed","0.25");
                 aqprop.setProperty("entity.follow","20.0");
-                aqprop.setProperty("entity.damage","40.0");
+                aqprop.setProperty("entity.damage","10.0");
                 aqprop.store(writer, "Configuration file for Variety Savanna mod");
                 writer.close();
             }

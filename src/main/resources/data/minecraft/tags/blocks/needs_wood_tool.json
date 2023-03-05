@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "expanse:dense_dirt_brick",
+    "expanse:dense_dirt_smooth",
+    "expanse:strata",
+    "expanse:dense_dirt_carved"
+  ]
+}

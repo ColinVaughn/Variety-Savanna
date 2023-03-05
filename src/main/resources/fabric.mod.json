@@ -21,6 +21,9 @@
     "main": [
       "net.bettermc.expanse.VarietySavanna"
     ],
+    "terrablender": [
+      "net.bettermc.expanse.VarietySavanna"
+    ],
     "client": [
       "net.bettermc.expanse.VarietySavannaClient"
     ]

@@ -14,7 +14,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.*;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.TimeHelper;
 import net.minecraft.util.math.MathHelper;
 
@@ -72,12 +71,12 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
     public static DefaultAttributeContainer.Builder setAttributes() {
         return AnimalEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, health)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 200)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,2)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 2)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, follow)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, speed)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 2)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, damage)
-                .add(EntityAttributes.GENERIC_ARMOR,5);
+                .add(EntityAttributes.GENERIC_ARMOR, 5);
     }
 
     protected void initGoals() {
@@ -132,13 +131,16 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
     public AnimationFactory getFactory() {
         return factory;
     }
+
     @Override
     public boolean isBreedingItem(ItemStack stack) {
         return stack.getItem() == Items.WHEAT;
     }
+
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.RHINO.create(world);
     }
+
     // ANIMATIONS
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
@@ -241,11 +243,26 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
 
 
     public boolean tryAttack(Entity target) {
-        boolean bl = target.damage(DamageSource.mob(this), (float)((int)this.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE)));
+        this.world.sendEntityStatus(this, (byte)4);
+        float f = (float)damage;
+        float g = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
+        boolean bl = target.damage(DamageSource.mob(this), g);
         if (bl) {
+            double var10000;
+            if (target instanceof LivingEntity) {
+                LivingEntity livingEntity = (LivingEntity)target;
+                var10000 = livingEntity.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
+            } else {
+                var10000 = 0.0;
+            }
+
+            double d = var10000;
+            double e = Math.max(0.0, 1.0 - d);
+            target.setVelocity(target.getVelocity().add(0.0, 0.4000000059604645 * e, 1.4000000059604645 * e));
             this.applyDamageEffects(this, target);
         }
 
+        this.playSound(SoundEvents.ENTITY_IRON_GOLEM_ATTACK, 1.0F, 1.0F);
         return bl;
     }
 
@@ -292,10 +309,11 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
     }
         private class AttackGoal extends MeleeAttackGoal {
             public AttackGoal() {
-                super(RhinoEntity.this, 1.25, true);
+                super(RhinoEntity.this, 1.0, true);
             }
 
             protected void attack(LivingEntity target, double squaredDistance) {
+
                 double d = this.getSquaredMaxAttackDistance(target);
                 if (squaredDistance <= d && this.isCooledDown()) {
                     this.resetCooldown();
@@ -322,9 +340,8 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
                 RhinoEntity.this.setWarning(false);
                 super.stop();
             }
-
             protected double getSquaredMaxAttackDistance(LivingEntity entity) {
-                return (double)(4.0F + entity.getWidth());
+                return (double)(6.0F + entity.getWidth());
             }
         }
 
@@ -372,7 +389,7 @@ public class RhinoEntity extends AnimalEntity implements Angerable, IAnimatable 
         }
 
         protected double getFollowRange() {
-            return super.getFollowRange() * 0.5D;
+            return super.getFollowRange() * 1.5D;
         }
     }
 }

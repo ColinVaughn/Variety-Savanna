@@ -1,0 +1,14 @@
+{
+  "entity.expanse.rhino": "Носоріг",
+  "item.expanse.rhino_leather": "Шкіра носорога",
+  "item.expanse.rhino_weapon": "Спис із рогу носорога",
+  "item.expanse.rhino_horn": "Ріг носорога",
+  "item.expanse.rhino_horn": "Ріг носорога",
+  "item.expanse.rhino_spawn_egg": "Яйце призиву носорога",
+  "block.expanse.dense_dirt": "Щільний ґрунт",
+  "block.expanse.dense_dirt_brick": "Цеглини зі щільного ґрунту",
+  "block.expanse.dense_dirt_smooth": "Гладкий щільний ґрунт",
+  "block.expanse.dense_dirt_carved": "Різьблена щільна ґрунтова цегла",
+  "itemGroup.expanse.placeholder": "Різноманітна Савана",
+  "block.expanse.strata": "Страта"
+}

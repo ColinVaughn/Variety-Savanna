@@ -9,7 +9,7 @@ public class RhinoModel extends AnimatedGeoModel<RhinoEntity> {
     @Override
     public Identifier getModelResource(RhinoEntity entity) {
         if(!entity.isBaby()) {
-            return new Identifier(VarietySavanna.MOD_ID, "geo/rhinoceros.geo.json");
+            return new Identifier(VarietySavanna.MOD_ID, "geo/rhinospear.geo.json");
         } else {
             return new Identifier(VarietySavanna.MOD_ID, "geo/rhinocerosbaby.geo.json");
         }

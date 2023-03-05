@@ -15,7 +15,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -25,33 +24,45 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.core.IAnimatable;
 
-public class PackedSnowballEntity extends PersistentProjectileEntity {
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+
+public class SpearEntity extends PersistentProjectileEntity implements IAnimatable {
     private static final TrackedData<Byte> LOYALTY;
     private static final TrackedData<Boolean> ENCHANTED;
-    private ItemStack RhinoStack;
+    private ItemStack tridentStack;
     private boolean dealtDamage;
     public int returnTimer;
-
-    public PackedSnowballEntity(EntityType<? extends PackedSnowballEntity> entityType, World world) {
-        super(entityType, world);
-        this.RhinoStack = new ItemStack(ModItems.RHINO_WEAPON);
+    private AnimationFactory factory = new AnimationFactory(this);
+    @Override
+    public void registerControllers(AnimationData data) {
     }
 
-    public PackedSnowballEntity(World world, LivingEntity owner, ItemStack stack) {
-        super(ModEntities.PackedSnowballEntityType, owner, world);
-        this.RhinoStack = new ItemStack(ModItems.RHINO_WEAPON);
-        this.RhinoStack = stack.copy();
-        this.dataTracker.set(LOYALTY, (byte) EnchantmentHelper.getLoyalty(stack));
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
+    public SpearEntity(EntityType<? extends SpearEntity> entityType, World world) {
+        super(entityType, world);
+        this.tridentStack = new ItemStack(ModItems.RHINO_WEAPON);
+    }
+
+    public SpearEntity(World world, LivingEntity owner, ItemStack stack) {
+        super(ModEntities.SPEARENTITYTYPE, owner, world);
+        this.tridentStack = new ItemStack(ModItems.RHINO_WEAPON);
+        this.tridentStack = stack.copy();
+        this.dataTracker.set(LOYALTY, (byte)EnchantmentHelper.getLoyalty(stack));
         this.dataTracker.set(ENCHANTED, stack.hasGlint());
     }
 
     protected void initDataTracker() {
+        super.initDataTracker();
         this.dataTracker.startTracking(LOYALTY, (byte)0);
         this.dataTracker.startTracking(ENCHANTED, false);
     }
@@ -101,7 +112,7 @@ public class PackedSnowballEntity extends PersistentProjectileEntity {
     }
 
     protected ItemStack asItemStack() {
-        return this.RhinoStack.copy();
+        return this.tridentStack.copy();
     }
 
     public boolean isEnchanted() {
@@ -117,7 +128,7 @@ public class PackedSnowballEntity extends PersistentProjectileEntity {
         Entity entity = entityHitResult.getEntity();
         float f = 8.0F;
         if (entity instanceof LivingEntity livingEntity) {
-            f += EnchantmentHelper.getAttackDamage(this.RhinoStack, livingEntity.getGroup());
+            f += EnchantmentHelper.getAttackDamage(this.tridentStack, livingEntity.getGroup());
         }
 
         Entity entity2 = this.getOwner();
@@ -158,7 +169,7 @@ public class PackedSnowballEntity extends PersistentProjectileEntity {
     }
 
     public boolean hasChanneling() {
-        return EnchantmentHelper.hasChanneling(this.RhinoStack);
+        return EnchantmentHelper.hasChanneling(this.tridentStack);
     }
 
     protected boolean tryPickup(PlayerEntity player) {
@@ -178,17 +189,17 @@ public class PackedSnowballEntity extends PersistentProjectileEntity {
 
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        if (nbt.contains("RhinoWeapon", 10)) {
-            this.RhinoStack = ItemStack.fromNbt(nbt.getCompound("RhinoWeapon"));
+        if (nbt.contains("Trident", 10)) {
+            this.tridentStack = ItemStack.fromNbt(nbt.getCompound("Trident"));
         }
 
         this.dealtDamage = nbt.getBoolean("DealtDamage");
-        this.dataTracker.set(LOYALTY, (byte)EnchantmentHelper.getLoyalty(this.RhinoStack));
+        this.dataTracker.set(LOYALTY, (byte)EnchantmentHelper.getLoyalty(this.tridentStack));
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.put("RhinoWeapon", this.RhinoStack.writeNbt(new NbtCompound()));
+        nbt.put("Trident", this.tridentStack.writeNbt(new NbtCompound()));
         nbt.putBoolean("DealtDamage", this.dealtDamage);
     }
 
@@ -209,7 +220,7 @@ public class PackedSnowballEntity extends PersistentProjectileEntity {
     }
 
     static {
-        LOYALTY = DataTracker.registerData(SnowballEntity.class, TrackedDataHandlerRegistry.BYTE);
-        ENCHANTED = DataTracker.registerData(SnowballEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+        LOYALTY = DataTracker.registerData(SpearEntity.class, TrackedDataHandlerRegistry.BYTE);
+        ENCHANTED = DataTracker.registerData(SpearEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     }
 }

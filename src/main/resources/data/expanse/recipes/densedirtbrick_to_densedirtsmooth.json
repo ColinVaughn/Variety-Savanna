@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "expanse:dense_dirt_brick"
+  },
+  "result": "expanse:dense_dirt_smooth",
+  "count": 1
+}

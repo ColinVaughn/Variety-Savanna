@@ -14,7 +14,6 @@ import java.util.List;
 
 public class ModConfiguredFeature {
 
-
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> DOGWOOD_TREE =
             ConfiguredFeatures.register("dogwood_tree", Feature.TREE, new TreeFeatureConfig.Builder(
                     BlockStateProvider.of(ModBlocks.DOGWOOD_LOG),

@@ -26,7 +26,7 @@ public class RhinoRenderer extends GeoEntityRenderer<RhinoEntity> {
                                      VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
                                      int packedLightIn, Identifier textureLocation) {
 
-            stack.scale(1f, 1f, 1f);
+            stack.scale(1.2f, 1.2f, 1.2f);
 
         return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }

@@ -7,5 +7,10 @@
   "item.expanse.rhino_horn": "Rhino Horn",
   "item.expanse.rhino_horn": "Rhino Horn",
   "item.expanse.rhino_spawn_egg": "Rhino Egg",
-  "itemGroup.expanse.placeholder": "Place Holder"
+  "block.expanse.dense_dirt": "Dense Dirt",
+  "block.expanse.dense_dirt_brick": "Dense Dirt Brick",
+  "block.expanse.dense_dirt_smooth": "Smooth Dense Dirt Brick",
+  "block.expanse.dense_dirt_carved": "Carved Dense Dirt Brick",
+  "itemGroup.expanse.placeholder": "Variety - Savanna",
+  "block.expanse.strata": "Strata"
 }

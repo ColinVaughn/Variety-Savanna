@@ -19,12 +19,13 @@ public class ModItems {
             new Item(new FabricItemSettings().group(ModItemGroups.placeholder))
     );
     public static final Item RHINO_WEAPON = registerItem("rhino_weapon",
-            new PackedSnowballItem(new FabricItemSettings().group(ModItemGroups.placeholder))
+            new SpearWeaponItem(new Item.Settings().maxCount(1).maxDamage(465).group(ModItemGroups.placeholder))
     );
 
     public static final Item RHINO_HORN = registerItem("rhino_horn",
             new Item(new FabricItemSettings().group(ModItemGroups.placeholder))
     );
+
 
 
 

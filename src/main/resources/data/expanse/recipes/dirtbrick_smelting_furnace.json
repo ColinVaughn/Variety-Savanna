@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "expanse:dense_dirt"
+  },
+  "result": "expanse:dense_dirt_brick",
+  "experience": 0.1,
+  "cookingtime": 400
+}
